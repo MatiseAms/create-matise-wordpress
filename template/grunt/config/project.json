@@ -1,0 +1,13 @@
+{
+	"themesrc": {
+		"root": "themesrc/"
+	},
+	"themedist": {
+		"root": "public/content/themes/<%= name %>/",
+		"vendor": "public/content/themes/<%= name %>/vendor/"
+	},
+	"wpconfig": {
+		"src": "wpconfig/",
+		"dist": "public/"
+	}
+}

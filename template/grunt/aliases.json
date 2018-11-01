@@ -1,0 +1,19 @@
+{
+	"default": ["notify", "dev", "browserSync", "watch"],
+	"standard": [
+		"eslint",
+		"clean:dist",
+		"imagemin",
+		"browserify",
+		"copy:theme",
+		"copy:images",
+		"copy:fonts",
+		"copy:vendor",
+		"copy:js",
+		"newer:csscomb"
+	],
+	"dev": ["standard", "copy:config_dev"],
+	"staging": ["standard", "copy:config_staging"],
+	"dist": ["standard", "copy:config_live"],
+	"getdb": ["shell:pulldatabase"]
+}

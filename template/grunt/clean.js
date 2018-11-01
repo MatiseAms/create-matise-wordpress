@@ -1,4 +1,4 @@
 module.exports = {
-	dist: ['public/content/themes/<%= appName %>/'],
-	vendor: ['public/content/themes/<%= appName %>/vendor/']
+	dist: ['<%= config.themedist.root %>'],
+	vendor: ['<%= config.themedist.root %>/vendor/']
 };

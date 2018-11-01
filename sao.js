@@ -3,8 +3,8 @@ const axios = require('axios');
 
 const rootDir = __dirname;
 
-const salts = async () => {
-	let response = await axios.get('https://api.wordpress.org/secret-key/1.1/salt');
+const salts = () => {
+	let response = axios.get('https://api.wordpress.org/secret-key/1.1/salt');
 	return response.data;
 };
 
@@ -31,13 +31,9 @@ module.exports = {
 		};
 	},
 	skipInterpolation: [
-		'grunt/browserSync.js',
-		'grunt/browserify.js',
 		'grunt/clean.js',
 		'grunt/copy.js',
 		'grunt/eslint.js',
-		'grunt/webfont.js',
-		'grunt/fontgen.js',
 		'grunt/uglify.js',
 		'grunt/watch.js'
 	],
@@ -45,7 +41,8 @@ module.exports = {
 		const moveable = {
 			gitignore: '.gitignore',
 			'_package.json': 'package.json',
-			'_composer.json': 'composer.json'
+			'_composer.json': 'composer.json',
+			'_eslintrc.js': '.eslintrc.js'
 		};
 
 		return { ...moveable };

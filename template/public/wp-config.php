@@ -48,7 +48,7 @@ if (!defined('DB_COLLATE')) {
 *
 * @since 2.6.0
 */
-<%- salts %>
+<%= salts %>
 /**#@-*/
 
 /*

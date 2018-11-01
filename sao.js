@@ -1,6 +1,4 @@
 const superb = require('superb');
-const glob = require('glob');
-const join = require('path').join;
 const axios = require('axios');
 
 const rootDir = __dirname;
@@ -18,7 +16,7 @@ module.exports = {
 		},
 		description: {
 			message: 'Project description',
-			default: `My ${superb()} Matise Wordpress project`
+			default: `My ${superb.random()} Matise Wordpress project`
 		},
 		author: {
 			message: 'Author name',

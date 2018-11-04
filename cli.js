@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const path = require('path');
-const sao = require('sao');
+const sao = require('./lib/sao');
 const minimist = require('minimist');
 
 const argv = minimist(process.argv.slice(2));
@@ -13,7 +13,7 @@ console.log(`> Generating Matise Nuxt.js project in ${targetPath}`);
 sao({
 	template: __dirname,
 	targetPath
-}).catch((err) => {
+}).catch(err => {
 	console.error(err.name === 'SAOError' ? err.message : err.stack);
 	process.exit(1);
 });

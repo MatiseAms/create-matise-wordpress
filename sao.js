@@ -3,8 +3,8 @@ const axios = require('axios');
 
 const rootDir = __dirname;
 
-const salts = () => {
-	let response = axios.get('https://api.wordpress.org/secret-key/1.1/salt');
+const getSalts = async () => {
+	let response = await axios.get('https://api.wordpress.org/secret-key/1.1/salt');
 	return response.data;
 };
 
@@ -25,9 +25,9 @@ module.exports = {
 			store: true
 		}
 	},
-	data() {
+	async data() {
 		return {
-			salts: salts()
+			salts: await getSalts()
 		};
 	},
 	skipInterpolation: [

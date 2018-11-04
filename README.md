@@ -17,3 +17,10 @@ npx create-matise-wordpress <my-project>
 ## Credits
 
 - Matise - [matise.nl](https://www.matise.nl)
+
+## Critical information
+
+This package uses SAO v0.22.17 which to my knowledge does not support async data functions (sao.js ln28).
+So what i did to fix this is copy the lib/index.js and lib/generate.js from the sao node_module and added some async await keywords to support this.
+The same thing goes for the kopy.js in the kopy node_module.
+So if anything breaks in future versions, this might have something to do with it.

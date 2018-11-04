@@ -6,6 +6,7 @@
 	"files": [
 		"cli.js",
 		"sao.js",
+		"lib/",
 		"template/"
 	],
 	"repository": {
@@ -18,7 +19,7 @@
 	"dependencies": {
 		"axios": "^0.18.0",
 		"minimist": "^1.2.0",
-		"sao": "^0.22.17",
+		"sao": "0.22.17",
 		"superb": "^3.0.0"
 	},
 	"devDependencies": {},

@@ -1,4 +1,4 @@
-# Create Matise Nuxt App
+# Create Matise Wordpress App
 
 [![NPM version](https://img.shields.io/npm/v/create-matise-wordpress.svg?style=flat)](https://npmjs.com/package/create-matise-wordpress) [![NPM downloads](https://img.shields.io/npm/dm/create-matise-wordpress.svg?style=flat)](https://npmjs.com/package/create-matise-wordpress)
 

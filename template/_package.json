@@ -12,9 +12,8 @@
 		"dev": "grunt",
 		"staging": "grunt staging",
 		"dist": "grunt dist",
-		"getdb": "grunt getdb",
-		"setup": "grunt setup",
-		"postinstall": "composer install"
+		"getdb": "sh scripts/pulldatabase.sh",
+		"postinstall": "sh scripts/postinstall.sh"
 	},
 	"dependencies": {},
 	"devDependencies": {

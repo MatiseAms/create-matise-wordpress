@@ -14,16 +14,17 @@ if (!defined('DEVENV')){
 	return;
 }
 
-// allow api access from anywhere for local and staging 
+// disable plugins on local and staging.
+// some plugins we don't want locally 
 switch (DEVENV) {
 	case 'local':
 	case 'staging':
 		update_option( 'upload_path', 'content/uploads' );
 		// update_option( 'upload_url_path', 'live content/uploads url to make images work' );
 
-		// some plugins we don't want locally
 		$plugins_to_deactivate = array();
 
+		// if you want the mailgun settings below to have effect, this one should be disabled.
 		$plugin_name = '/mailgun/mailgun.php';
 		if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
 			$plugins_to_deactivate[] = $plugin_name;

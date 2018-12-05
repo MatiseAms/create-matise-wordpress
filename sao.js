@@ -18,6 +18,10 @@ module.exports = {
 			message: 'Project description',
 			default: `My ${superb.random()} Matise Wordpress project`
 		},
+		mailgun: {
+			message: 'Mailgun api key',
+			default: 'key-undefined'
+		},
 		author: {
 			message: 'Author name',
 			type: 'string',

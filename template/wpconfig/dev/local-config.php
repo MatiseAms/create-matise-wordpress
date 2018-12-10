@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-define('DB_NAME', 'scotchbox'); // TODO: automagically fill the right db name
+define('DB_NAME', '<%= name %>');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
 define('DB_HOST', 'localhost');
@@ -32,3 +32,5 @@ define('WP_SITEURL', $protocol.$_SERVER['SERVER_NAME'].'/wordpress');
 define('WP_HOME', $protocol.$_SERVER['SERVER_NAME'].'/');
 define('WP_CONTENT_DIR', dirname(__FILE__).'/content');
 define('WP_CONTENT_URL', $protocol.$_SERVER['SERVER_NAME'].'/content');
+
+define('ACFPATH', dirname(__FILE__) . '/../themesrc/includes/field-groups' );

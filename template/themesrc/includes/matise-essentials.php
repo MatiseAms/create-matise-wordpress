@@ -24,6 +24,8 @@ switch (DEVENV) {
 
 $mailgun_key = '<%= mailgun %>';
 
+define('MAILGUN_API_KEY', $mailgun_key);
+
 // disable plugins on local and staging.
 // some plugins we don't want locally 
 switch (DEVENV) {
@@ -32,34 +34,38 @@ switch (DEVENV) {
 		update_option( 'upload_path', 'content/uploads' );
 		// update_option( 'upload_url_path', 'live content/uploads url to make images work' );
 
-		$plugins_to_deactivate = array();
+
+		function deactivate_default_plugins(){
+			$plugins_to_deactivate = array();
 		
-		// if you want the mailgun settings below to have effect, this one should be disabled.
-		if($mailgun_key === 'key-undefined'){
-			$plugin_name = '/mailgun/mailgun.php';
+			// if you want the mailgun settings below to have effect, this one should be disabled.
+			if(defined('MAILGUN_API_KEY') && MAILGUN_API_KEY === 'key-undefined'){
+				$plugin_name = '/mailgun/mailgun.php';
+				if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
+					$plugins_to_deactivate[] = $plugin_name;
+				}
+			}
+	
+			$plugin_name = '/w3-total-cache/w3-total-cache.php';
 			if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
 				$plugins_to_deactivate[] = $plugin_name;
 			}
+	
+			$plugin_name = '/wordfence/wordfence.php';
+			if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
+				$plugins_to_deactivate[] = $plugin_name;
+			}
+	
+			$plugin_name = '/backwpup/backwpup.php';
+			if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
+				$plugins_to_deactivate[] = $plugin_name;
+			}
+	
+			deactivate_plugins( 
+				$plugins_to_deactivate
+			);
 		}
-
-		$plugin_name = '/w3-total-cache/w3-total-cache.php';
-		if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
-			$plugins_to_deactivate[] = $plugin_name;
-		}
-
-		$plugin_name = '/wordfence/wordfence.php';
-		if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
-			$plugins_to_deactivate[] = $plugin_name;
-		}
-
-		$plugin_name = '/backwpup/backwpup.php';
-		if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
-			$plugins_to_deactivate[] = $plugin_name;
-		}
-
-		deactivate_plugins( 
-			$plugins_to_deactivate
-		);
+		add_action('admin_init', 'deactivate_default_plugins');
 
 		function remove_menu_links() {
 			// remove_menu_page('upload.php'); //remove media
@@ -70,14 +76,14 @@ switch (DEVENV) {
 }
 
 // mailgun temporary matise settings
-if($mailgun_key !== 'key-undefined'){
+if(MAILGUN_API_KEY !== 'key-undefined'){
 	switch (DEVENV) {
 		case 'staging':
 			update_option('mailgun', array(
 				'region' => 'us',
 				'useAPI' => 1,
 				'domain' => 'mg.matise.nl',
-				'apiKey' => $mailgun_key,
+				'apiKey' => MAILGUN_API_KEY,
 				'secure' => 1,
 				'sectype' => 'tls',
 				'track-clicks' => 'htmlonly',

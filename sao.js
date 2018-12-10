@@ -12,7 +12,17 @@ module.exports = {
 	prompts: {
 		name: {
 			message: 'Project name',
-			default: ':folderName:'
+			default: ':folderName:',
+			validate: function(value) {
+				var pass = value.match(
+					/[A-Z]|\s|\W/
+				);
+				if (pass) {
+					return 'Please enter a valid name without uppercase, whitespaces, or symbols';
+				}
+
+				return true;
+			}
 		},
 		description: {
 			message: 'Project description',

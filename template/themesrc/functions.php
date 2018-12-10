@@ -12,12 +12,12 @@
 //===================
 // Matise theme Development essentials
 //===================
-require_once('functions/matise-essentials.php');
+require_once('includes/matise-essentials.php');
 
 //===================
-// Functions folder includes
+// Includes folder includes
 //===================
-require_once('functions/includes.php');
+require_once('includes/includes.php');
 
 //===================
 // Theme specific functions functions

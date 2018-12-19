@@ -10,4 +10,4 @@ valet secure <%= name %>
 valet db create <%= name %>
 
 # start developing
-npm run dev
+# npm run dev

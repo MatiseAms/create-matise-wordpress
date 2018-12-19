@@ -73,7 +73,10 @@ module.exports = {
 		console.log();
 		console.log(chalk.bold(`  To get started:\n`));
 		cd();
-		console.log(`    npm run dev\n`);
+		console.log(`    npm run dev`);
+		console.log(`    - Install wordpress`);
+		console.log(`    - Activate your theme`);
+		console.log(`    - Switch to pretty permalinks to get your api going\n`);
 		console.log(chalk.bold(`  To build & start for production:\n`));
 		cd();
 		console.log(`    npm run staging`);

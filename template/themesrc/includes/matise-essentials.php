@@ -78,6 +78,7 @@ switch (DEVENV) {
 // mailgun temporary matise settings
 if(MAILGUN_API_KEY !== 'key-undefined'){
 	switch (DEVENV) {
+		case 'local':
 		case 'staging':
 			update_option('mailgun', array(
 				'region' => 'us',

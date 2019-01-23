@@ -18,7 +18,6 @@
 	"dependencies": {},
 	"devDependencies": {
 		"eslint-plugin-prettier": "^3.0.0",
-		"eslint-plugin-vue": "^4.7.1",
 		"grunt": "^1.0.2",
 		"grunt-browser-sync": "^2.2.0",
 		"grunt-cli": "^1.2.0",

@@ -14,7 +14,7 @@
 		"type": "git"
 	},
 	"scripts": {
-		"test": "rm -rf fissa && node cli.js fissa"
+		"try": "rm -rf fissa && node cli.js fissa"
 	},
 	"dependencies": {
 		"axios": "^0.18.0",

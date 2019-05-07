@@ -31,9 +31,7 @@ define('MAILGUN_API_KEY', $mailgun_key);
 switch (DEVENV) {
 	case 'local':
 	case 'staging':
-		update_option( 'upload_path', 'content/uploads' );
 		// update_option( 'upload_url_path', 'live content/uploads url to make images work' );
-
 
 		function deactivate_default_plugins(){
 			$plugins_to_deactivate = array();

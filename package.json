@@ -1,6 +1,6 @@
 {
 	"name": "create-matise-wordpress",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Create Matise Wordpress App.",
 	"bin": "cli.js",
 	"files": [

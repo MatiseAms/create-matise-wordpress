@@ -32,5 +32,3 @@ define('WP_SITEURL', $protocol.$_SERVER['SERVER_NAME'].'/wordpress');
 define('WP_HOME', $protocol.$_SERVER['SERVER_NAME'].'/');
 define('WP_CONTENT_DIR', dirname(__FILE__).'/content');
 define('WP_CONTENT_URL', $protocol.$_SERVER['SERVER_NAME'].'/content');
-
-define('ACFPATH', dirname(__FILE__) . '/../themesrc/includes/field-groups' );

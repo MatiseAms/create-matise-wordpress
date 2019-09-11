@@ -18,7 +18,9 @@ if (!defined('DEVENV')){
 switch (DEVENV) {
 	case 'local':
 	case 'staging':
-		header("Access-Control-Allow-Origin: *");
+		if (!header_sent()) {
+			header("Access-Control-Allow-Origin: *");
+		}
 		break;
 }
 

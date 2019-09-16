@@ -14,6 +14,11 @@ Make sure you have [npx](https://www.npmjs.com/package/npx) installed (`npx` is 
 npx create-matise-wordpress <my-project>
 ```
 
+
+## Activating `/wp-json`
+After setup change permalink settings to post name, change homepage display to a static page and activate your theme.
+
+
 ## Credits
 
 - Matise - [matise.nl](https://www.matise.nl)

@@ -9,19 +9,40 @@ function debug($object){
 	echo '</pre>';
 }
 
-// stop here if DEVENV is not set
-if (!defined('DEVENV')){
-	return;
+// Change home and rest url (for headless wordpress)
+function change_home_url($url, $path, $orig_scheme, $blog_id){
+	if(!defined(API_DOMAIN) || !defined(FRONTEND_DOMAIN)){
+		return $url;
+	}
+	if(strpos($url,'https://'.API_DOMAIN.'/wp-json')){
+		return $url;
+	} else {
+		return str_replace('https://'.API_DOMAIN, 'https://'.FRONTEND_DOMAIN, $url);
+	}
+}
+function change_rest_url($url, $path, $blog_id, $scheme){
+	if(!defined(API_DOMAIN) || !defined(FRONTEND_DOMAIN)){
+		return $url;
+	}
+	$home = 'https://'.FRONTEND_DOMAIN.'/';
+	$rest_home = 'https://'.API_DOMAIN.'/';
+	if(strpos($url, $home.'wp-json/') > -1){
+		return str_replace($home.'wp-json/', $rest_home.'wp-json/', $url);
+	}
+	return $url;
 }
 
-// allow api access from anywhere for local and staging 
-switch (DEVENV) {
-	case 'local':
-	case 'staging':
-		if (!headers_sent()) {
-			header("Access-Control-Allow-Origin: *");
-		}
-		break;
+// Check if we are running on flywheel, if so, enable the home_url and rest_url filters
+if(defined('FLYWHEEL_CONFIG_DIR')){
+	add_filter('home_url', 'change_home_url', 99, 4);
+	add_filter('rest_url', 'change_rest_url', 99, 4);
+}
+
+if(!headers_sent()){
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+	header('Access-Control-Max-Age: 1000');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 }
 
 $mailgun_key = '<%= mailgun %>';
@@ -30,53 +51,55 @@ define('MAILGUN_API_KEY', $mailgun_key);
 
 // disable plugins on local and staging.
 // some plugins we don't want locally 
-switch (DEVENV) {
-	case 'local':
-	case 'staging':
-		// update_option( 'upload_url_path', 'live content/uploads url to make images work' );
+if(defined('DEVENV')){
+	switch (DEVENV) {
+		case 'local':
+		case 'staging':
+			// update_option( 'upload_url_path', 'live content/uploads url to make images work' );
 
-		function deactivate_default_plugins(){
-			$plugins_to_deactivate = array();
+			function deactivate_default_plugins(){
+				$plugins_to_deactivate = array();
+			
+				// if you want the mailgun settings below to have effect, this one should be disabled.
+				if(defined('MAILGUN_API_KEY') && MAILGUN_API_KEY === 'key-undefined'){
+					$plugin_name = '/mailgun/mailgun.php';
+					if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
+						$plugins_to_deactivate[] = $plugin_name;
+					}
+				}
 		
-			// if you want the mailgun settings below to have effect, this one should be disabled.
-			if(defined('MAILGUN_API_KEY') && MAILGUN_API_KEY === 'key-undefined'){
-				$plugin_name = '/mailgun/mailgun.php';
+				$plugin_name = '/w3-total-cache/w3-total-cache.php';
 				if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
 					$plugins_to_deactivate[] = $plugin_name;
 				}
-			}
-	
-			$plugin_name = '/w3-total-cache/w3-total-cache.php';
-			if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
-				$plugins_to_deactivate[] = $plugin_name;
-			}
-	
-			$plugin_name = '/wordfence/wordfence.php';
-			if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
-				$plugins_to_deactivate[] = $plugin_name;
-			}
-	
-			$plugin_name = '/backwpup/backwpup.php';
-			if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
-				$plugins_to_deactivate[] = $plugin_name;
-			}
-	
-			deactivate_plugins( 
-				$plugins_to_deactivate
-			);
-		}
-		add_action('admin_init', 'deactivate_default_plugins');
-
-		function remove_menu_links() {
-			// remove_menu_page('upload.php'); //remove media
 		
-		}
-		add_action( 'admin_menu', 'remove_menu_links' );
-		break;
+				$plugin_name = '/wordfence/wordfence.php';
+				if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
+					$plugins_to_deactivate[] = $plugin_name;
+				}
+		
+				$plugin_name = '/backwpup/backwpup.php';
+				if(file_exists(WP_PLUGIN_DIR . $plugin_name)){
+					$plugins_to_deactivate[] = $plugin_name;
+				}
+		
+				deactivate_plugins( 
+					$plugins_to_deactivate
+				);
+			}
+			add_action('admin_init', 'deactivate_default_plugins');
+
+			function remove_menu_links() {
+				// remove_menu_page('upload.php'); //remove media
+			
+			}
+			add_action( 'admin_menu', 'remove_menu_links' );
+			break;
+	}
 }
 
 // mailgun temporary matise settings
-if(MAILGUN_API_KEY !== 'key-undefined'){
+if(defined('MAILGUN_API_KEY') && MAILGUN_API_KEY !== 'key-undefined'){
 	switch (DEVENV) {
 		case 'local':
 		case 'staging':
@@ -105,4 +128,25 @@ if(MAILGUN_API_KEY !== 'key-undefined'){
 			add_action('admin_notices', 'general_admin_notice');
 			break;
 	}
+}
+
+//===================
+// Show commit reference and environment in admin bar
+//===================
+if(!strpos(COMMIT, 'commit')){
+	function my_custom_admin_head() {
+		$matise_env = '';
+		if(defined('MATISE_ENVIRONMENT')){
+			$matise_env = MATISE_ENVIRONMENT;
+		}
+		echo "<script>
+		window.addEventListener('load', function () {
+			var ul = document.querySelector('ul#wp-admin-bar-top-secondary');
+			var li = document.createElement('li');
+			li.appendChild(document.createTextNode('". $matise_env . ' - ' . COMMIT ."'));
+			ul.appendChild(li);
+		}, false);
+		</script>";
+	}
+	add_action( 'admin_head', 'my_custom_admin_head' );
 }

@@ -35,7 +35,7 @@ function my_acf_json_load_point( $paths ) {
 /**
  * Hide the acf menu when not on local env. as changes will not be saved.
  */
-if(!defined('DEVENV') || (defined('DEVENV') && DEVENV !== 'local')){
+if(defined('MATISE_ENVIRONMENT')){
 	function remove_menus(){
 		remove_menu_page( 'edit.php?post_type=acf-field-group' ); //Field groups - plugin page
 	}

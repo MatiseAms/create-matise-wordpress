@@ -9,6 +9,18 @@
  * @since        1.0
  */
 
+define('COMMIT', '<commit>');
+define('BRANCH', '<branch_ref>');
+
+if(BRANCH === 'refs/heads/master'){
+	define('MATISE_ENVIRONMENT', 'production');
+} else if(BRANCH === 'refs/heads/staging'){
+	define('MATISE_ENVIRONMENT', 'staging');
+}
+
+define('API_DOMAIN', '<%= name %>.flywheelsites.com');
+define('FRONTEND_DOMAIN', '<%= name %>.matise.org');
+
 //===================
 // Matise theme Development essentials
 //===================

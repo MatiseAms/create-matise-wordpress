@@ -1,6 +1,6 @@
 <?php
 
-namespace <%= name %> ;
+namespace <%= name %>;
 // use Matise\Register_Fields;
 // use Matise\Utilities;
 
@@ -53,5 +53,5 @@ require_once('field-groups/acf.php');
 // 		'legal_menu' => 'Legal menu'
 // 	);
 // 	// register wp-json/menus/all
-	$menus->init();
-}
+//	$menus->init();
+// }

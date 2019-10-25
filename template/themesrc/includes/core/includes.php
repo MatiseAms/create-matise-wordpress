@@ -79,6 +79,6 @@ namespace <%= name %>;
 //	$translations->translation_key = '<%= name %>';
 // 	$translations->init();
 
-//  new Filters\API();
-//  new Filters\ACF();
+//  new Filters\Matise_API();
+//  new Filters\Matise_ACF();
 // }

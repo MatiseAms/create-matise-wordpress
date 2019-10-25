@@ -31,7 +31,7 @@ module.exports = {
 				var pass = value.toLowerCase().match(
 					/[A-Z]|\s|\W/
 				);
-				if (pass) {
+				if (invalid) {
 					return 'Please enter a name without whitespaces';
 				}
 				return true;

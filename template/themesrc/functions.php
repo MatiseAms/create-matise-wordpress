@@ -37,4 +37,4 @@ switch (DEVENV) {
 //===================
 // Includes folder includes
 //===================
-require_once('includes/index.php');
+require_once('includes/includes.php');

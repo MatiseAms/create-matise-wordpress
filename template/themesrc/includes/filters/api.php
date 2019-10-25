@@ -2,7 +2,7 @@
 namespace Matise\Filters;
 
 /**
- * We add all fields to the api, we can filter them before returing. Try to use the ACF before using this!
+ * We add all fields to the api, we can filter them before returning. Try to use the ACF before using this!
  */
 
 class Matise_API {

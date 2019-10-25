@@ -13,11 +13,11 @@ module.exports = {
 		packageName: {
 			message: 'Package name (lowercase without whitespace) used for package name, valet and git',
 			default: ':folderName:',
-			validate: function (value) {
+			validate: function(value) {
 				const invalid = value.match(
 					/[A-Z]|\s|\W/
 				);
-				if (pass) {
+				if (invalid) {
 					return 'Please enter a valid name without uppercase, whitespaces, or symbols';
 				}
 
@@ -27,8 +27,8 @@ module.exports = {
 		name: {
 			message: 'Project name (Nice name without spaces), used for namespacing classes and files',
 			default: ':folderName:',
-			validate: function (value) {
-				var pass = value.toLowerCase().match(
+			validate: function(value) {
+				var invalid = value.toLowerCase().match(
 					/[A-Z]|\s|\W/
 				);
 				if (invalid) {

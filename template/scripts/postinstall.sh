@@ -3,11 +3,11 @@ composer install
 
 # link valet to the public folder
 cd public
-valet link <%= name %>
+valet link <%= packageName %>
 cd ..
 
-valet secure <%= name %>
-valet db create <%= name %>
+valet secure <%= packageName %>
+valet db create <%= packageName %>
 
 # start developing
 # npm run dev

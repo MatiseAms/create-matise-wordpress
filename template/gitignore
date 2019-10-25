@@ -5,7 +5,7 @@ public/wordpress
 public/local-config.php
 public/.htaccess
 
-public/content/themes/<%= name %>
+public/content/themes/<%= packageName %>
 public/content/themes/storefront
 public/content/uploads
 public/content/cache

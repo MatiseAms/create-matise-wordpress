@@ -10,10 +10,10 @@ const getSalts = async () => {
 
 module.exports = {
 	prompts: {
-		name: {
-			message: 'Project name',
+		packageName: {
+			message: 'Package name (lowercase without whitespace)',
 			default: ':folderName:',
-			validate: function(value) {
+			validate: function (value) {
 				var pass = value.match(
 					/[A-Z]|\s|\W/
 				);
@@ -21,6 +21,19 @@ module.exports = {
 					return 'Please enter a valid name without uppercase, whitespaces, or symbols';
 				}
 
+				return true;
+			}
+		},
+		name: {
+			message: 'Project name (Nice name without spaces)',
+			default: ':folderName:',
+			validate: function (value) {
+				var pass = value.toLowerCase().match(
+					/[A-Z]|\s|\W/
+				);
+				if (pass) {
+					return 'Please enter a name without whitespaces';
+				}
 				return true;
 			}
 		},

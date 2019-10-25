@@ -1,10 +1,14 @@
 <?php
 
 namespace <%= name %>;
+
 // use Matise\Register_Fields;
 // use Matise\Utilities;
+// use Matise\Pages;
+// use Matise\Filters;
 
-require_once('field-groups/acf.php');
+// require_once(__DIR__ . '/../filters/api.php');
+// require_once(__DIR__ .'/../filters/acf.php');
 
 // add_action( 'init', __NAMESPACE__ . '\\matise_start', 0);
 // /**
@@ -24,28 +28,40 @@ require_once('field-groups/acf.php');
 // 		return;
 // 	}
 	
+
 // 	$basic_fields = new Register_Fields\Basics();
+// 	$path_page = new Pages\Path();
 // 	$menus = new Utilities\Menus();
+// 	$search = new Utilities\Search();
+// 	$translations = new Utilities\Translations();
 
 
 // 	// add extended fields variables to page endpoints
-// 	$basic_fields->init_by_array(
-// 		array(
-// 			'uri',
-// 			'fields',
-// 			'title',
-// 			'children',
-// 			'content',
-// 			'excerpt',
-// 			'featured_image',
-// 			'categories',
-// 			'tags',
-// 			'template',
-// 			'guid'
-// 		)
-// 	);
+// $basic_fields->init_by_array(
+// 	array(
+// 		'uri',
+// 		'link',
+// 		'fields',
+// 		'title',
+// 		'children',
+// 		'siblings',
+// 		'content',
+// 		'excerpt',
+// 		'featured_image',
+// 		'categories',
+// 		'tags',
+// 		'template',
+// 		'guid',
+// 		'breadcrumbs',
+// 		'seo'
+// 	)
+// );
+
+//	init basic uri pages
+//	$path_page->init();
 
 
+//	$menus->translation_key = '<%= name %>';
 // 	$menus->menus = array(
 // 		'header_menu' => 'Header menu',
 // 		'footer_menu' => 'Footer menu',
@@ -54,4 +70,12 @@ require_once('field-groups/acf.php');
 // 	);
 // 	// register wp-json/menus/all
 //	$menus->init();
+
+//	init search endpoint
+//	$search->init();
+//	$search->enable_default_filter();
+
+//	Add translations to the project
+//	$translations->translation_key = '<%= name %>';
+// 	$translations->init();
 // }

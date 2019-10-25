@@ -10,17 +10,18 @@ function debug($object){
 }
 
 // Change home and rest url (for headless wordpress)
-function change_home_url($url, $path, $orig_scheme, $blog_id){
-	if(!defined(API_DOMAIN) || !defined(FRONTEND_DOMAIN)){
+function change_home_url($url, $path) {
+	if (!defined(API_DOMAIN) || !defined(FRONTEND_DOMAIN)) {
 		return $url;
 	}
-	if(strpos($url,'https://'.API_DOMAIN.'/wp-json')){
+	if (strpos($url,'https://' . API_DOMAIN . '/wp-json')) {
 		return $url;
 	} else {
-		return str_replace('https://'.API_DOMAIN, 'https://'.FRONTEND_DOMAIN, $url);
+		return str_replace('https://' . API_DOMAIN, 'https://'. FRONTEND_DOMAIN , $url);
 	}
 }
-function change_rest_url($url, $path, $blog_id, $scheme){
+
+function change_rest_url($url, $path){
 	if(!defined(API_DOMAIN) || !defined(FRONTEND_DOMAIN)){
 		return $url;
 	}
@@ -33,10 +34,14 @@ function change_rest_url($url, $path, $blog_id, $scheme){
 }
 
 // Check if we are running on flywheel, if so, enable the home_url and rest_url filters
-if(defined('FLYWHEEL_CONFIG_DIR')){
-	add_filter('home_url', 'change_home_url', 99, 4);
-	add_filter('rest_url', 'change_rest_url', 99, 4);
+if (defined('FLYWHEEL_CONFIG_DIR') || DEVENV === 'local'){
+	foreach( [ 'post', 'page', 'post_type' ] as $type ) {
+		add_filter( $type . '_link', 'change_home_url' , 9999, 2);
+	}
+	add_filter( $type . '_link', 'change_home_url' , 9999, 2);
+	add_filter('rest_url', 'change_rest_url', 9999, 4);
 }
+
 
 if(!headers_sent()){
 	header('Access-Control-Allow-Origin: *');
@@ -51,7 +56,7 @@ define('MAILGUN_API_KEY', $mailgun_key);
 
 // disable plugins on local and staging.
 // some plugins we don't want locally 
-if(defined('DEVENV')){
+if (defined('DEVENV')){
 	switch (DEVENV) {
 		case 'local':
 		case 'staging':
@@ -114,7 +119,7 @@ if(defined('MAILGUN_API_KEY') && MAILGUN_API_KEY !== 'key-undefined'){
 				'track-opens' => 1,
 				'from-address' => 'temp@mg.matise.nl',
 				'from-name' => 'Matise Staging Wordpress',
-				'campaign-id' => 'matise-staging-<%= name %>'
+				'campaign-id' => 'matise-staging-<%= packageName %>'
 			));	
 
 			function general_admin_notice(){

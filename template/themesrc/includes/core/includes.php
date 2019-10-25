@@ -78,4 +78,7 @@ namespace <%= name %>;
 //	Add translations to the project
 //	$translations->translation_key = '<%= name %>';
 // 	$translations->init();
+
+//  new Filters\API();
+//  new Filters\ACF();
 // }

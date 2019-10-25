@@ -11,7 +11,7 @@ const getSalts = async () => {
 module.exports = {
 	prompts: {
 		packageName: {
-			message: 'Package name (lowercase without whitespace)',
+			message: 'Package name (lowercase without whitespace) used for package name, valet and git',
 			default: ':folderName:',
 			validate: function (value) {
 				var pass = value.match(
@@ -25,7 +25,7 @@ module.exports = {
 			}
 		},
 		name: {
-			message: 'Project name (Nice name without spaces)',
+			message: 'Project name (Nice name without spaces), used for namespacing classes and files',
 			default: ':folderName:',
 			validate: function (value) {
 				var pass = value.toLowerCase().match(

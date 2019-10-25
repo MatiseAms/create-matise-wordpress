@@ -14,7 +14,7 @@ module.exports = {
 			message: 'Package name (lowercase without whitespace) used for package name, valet and git',
 			default: ':folderName:',
 			validate: function (value) {
-				var pass = value.match(
+				const invalid = value.match(
 					/[A-Z]|\s|\W/
 				);
 				if (pass) {

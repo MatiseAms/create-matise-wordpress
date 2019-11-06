@@ -3,8 +3,8 @@
 		"root": "themesrc/"
 	},
 	"themedist": {
-		"root": "public/content/themes/<%= name %>/",
-		"vendor": "public/content/themes/<%= name %>/vendor/"
+		"root": "public/content/themes/<%= packageName %>/",
+		"vendor": "public/content/themes/<%= packageName %>/vendor/"
 	},
 	"wpconfig": {
 		"src": "wpconfig/",

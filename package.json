@@ -25,7 +25,8 @@
 	"devDependencies": {},
 	"authors": [
 		"Sil van Diepen <sil@matise.nl>",
-		"Stephan Hoogland <stephan@matise.nl>"
+		"Stephan Hoogland <stephan@matise.nl>",
+		"Dennis Spierenburg <dennis@matise.nl>"
 	],
 	"license": "MIT"
 }

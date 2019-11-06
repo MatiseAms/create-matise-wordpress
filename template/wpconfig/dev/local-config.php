@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-define('DB_NAME', '<%= name %>');
+define('DB_NAME', '<%= packageName %>');
 define('DB_USER', 'root');
 define('DB_PASSWORD', 'root');
 define('DB_HOST', 'localhost');

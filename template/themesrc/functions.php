@@ -19,11 +19,11 @@ if (BRANCH === 'refs/heads/master'){
 }
 
 
-if (!defined('DEVENV')) {
-	define('DEVENV', 'production');
+if (!defined('MATISE_ENVIRONMENT')) {
+	define('MATISE_ENVIRONMENT', 'local');
 }
 
-switch (DEVENV) {
+switch (MATISE_ENVIRONMENT) {
 	case 'local':
 		define('API_DOMAIN', '<%= packageName %>.test');
 		define('FRONTEND_DOMAIN', 'localhost:3000');

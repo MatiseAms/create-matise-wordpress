@@ -24,8 +24,6 @@ define('SCRIPT_DEBUG', false);
 define('WP_DEBUG_LOG', false);
 define('WP_DEBUG_DISPLAY', false);
 
-define('DEVENV', 'staging');
-
 $protocol = 'http://';
 
 define('WP_SITEURL', $protocol.$_SERVER['SERVER_NAME'].'/wordpress');

@@ -34,11 +34,11 @@ function change_rest_url($url, $path){
 }
 
 // Check if we are running on flywheel, if so, enable the home_url and rest_url filters
-if (defined('FLYWHEEL_CONFIG_DIR') || DEVENV === 'local'){
+if (defined('FLYWHEEL_CONFIG_DIR') || MATISE_ENVIRONMENT === 'local'){
 	foreach( [ 'post', 'page', 'post_type' ] as $type ) {
 		add_filter( $type . '_link', 'change_home_url' , 9999, 2);
 	}
-	add_filter( $type . '_link', 'change_home_url' , 9999, 2);
+	add_filter( 'home_url', 'change_home_url' , 9999, 2);
 	add_filter('rest_url', 'change_rest_url', 9999, 4);
 }
 
@@ -56,8 +56,8 @@ define('MAILGUN_API_KEY', $mailgun_key);
 
 // disable plugins on local and staging.
 // some plugins we don't want locally 
-if (defined('DEVENV')){
-	switch (DEVENV) {
+if (defined('MATISE_ENVIRONMENT')){
+	switch (MATISE_ENVIRONMENT) {
 		case 'local':
 		case 'staging':
 			// update_option( 'upload_url_path', 'live content/uploads url to make images work' );
@@ -105,7 +105,7 @@ if (defined('DEVENV')){
 
 // mailgun temporary matise settings
 if(defined('MAILGUN_API_KEY') && MAILGUN_API_KEY !== 'key-undefined'){
-	switch (DEVENV) {
+	switch (MATISE_ENVIRONMENT) {
 		case 'local':
 		case 'staging':
 			update_option('mailgun', array(

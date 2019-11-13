@@ -24,8 +24,6 @@ define('SCRIPT_DEBUG', true);
 define('WP_DEBUG_LOG', true);
 define('WP_DEBUG_DISPLAY', false);
 
-define('DEVENV', 'local');
-
 $protocol = 'https://'; // with valet we could/should set this to https locally
 
 define('WP_SITEURL', $protocol.$_SERVER['SERVER_NAME'].'/wordpress');
